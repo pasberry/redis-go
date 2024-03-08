@@ -28,7 +28,7 @@ func main() {
 		}
 
 		//handler method.
-		handleClient(conn)
+		go handleClient(conn)
 
 	}
 }
