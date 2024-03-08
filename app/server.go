@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net"
 	"os"
@@ -45,7 +46,8 @@ func handleClient(conn net.Conn) {
 		log.Println("Error", err)
 	}
 
-	log.Println("Received Data:", buf[:input])
+	fmt.Print("+PONG\r\n")
+	//log.Println("Received Data:", buf[:input])
 
 	//write the same data back to the user.
 	_, err = conn.Write(buf[:input])
