@@ -19,16 +19,6 @@ func main() {
 	fmt.Println("The server is up and listening on port 6379")
 
 	for {
-		//Block until we recieve an incoming request
-		conn, err := listener.Accept()
-		if err != nil {
-			fmt.Println("Error:", err)
-			continue
-		}
-
-		//handler method.
-		go handleClient(conn)
-
 		conns := make(chan net.Conn)
 		go func() {
 			for {
