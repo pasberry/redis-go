@@ -41,16 +41,16 @@ func handleClient(conn net.Conn) {
 	//read the data
 	buf := make([]byte, 1024)
 
-	input, err := conn.Read(buf)
+	_, err := conn.Read(buf)
 	if err != nil {
 		log.Println("Error", err)
 	}
 
-	fmt.Print([]byte("+PONG\r\n"))
-	//log.Println("Received Data:", buf[:input])
+	res := []byte("+PONG\r\n")
+	fmt.Print(res)
 
 	//write the same data back to the user.
-	_, err = conn.Write(buf[:input])
+	_, err = conn.Write(res)
 	if err != nil {
 		log.Println("Error:", err)
 	}
