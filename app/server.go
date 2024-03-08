@@ -46,7 +46,7 @@ func handleClient(conn net.Conn) {
 		log.Println("Error", err)
 	}
 
-	fmt.Print("+PONG\r\n")
+	fmt.Print([]byte("+PONG\r\n"))
 	//log.Println("Received Data:", buf[:input])
 
 	//write the same data back to the user.
