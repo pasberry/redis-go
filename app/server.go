@@ -29,6 +29,22 @@ func main() {
 		//handler method.
 		go handleClient(conn)
 
+		conns := make(chan net.Conn)
+		go func() {
+			for {
+				conn, err := listener.Accept()
+				if err != nil {
+					fmt.Println("Error accepting connection: ", err.Error())
+					os.Exit(1)
+				}
+				conns <- conn
+			}
+		}()
+
+		for c := range conns {
+			go handleClient(c)
+		}
+
 	}
 }
 
