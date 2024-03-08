@@ -38,21 +38,23 @@ func handleClient(conn net.Conn) {
 	//make sure we close the listener
 	defer conn.Close()
 
-	//read the data
-	buf := make([]byte, 1024)
+	for {
+		//read the data
+		buf := make([]byte, 1024)
 
-	_, err := conn.Read(buf)
-	if err != nil {
-		log.Println("Error", err)
+		_, err := conn.Read(buf)
+		if err != nil {
+			log.Println("Error", err)
+		}
+
+		res := []byte("+PONG\r\n")
+		fmt.Print(res)
+
+		//write the same data back to the user.
+		_, err = conn.Write(res)
+		if err != nil {
+			log.Println("Error:", err)
+		}
+
 	}
-
-	res := []byte("+PONG\r\n")
-	fmt.Print(res)
-
-	//write the same data back to the user.
-	_, err = conn.Write(res)
-	if err != nil {
-		log.Println("Error:", err)
-	}
-
 }
